@@ -8,50 +8,43 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <link rel="stylesheet" href="style.css" type="text/css" media="all" />
-    <title>Sittings</title>
+    <title>Settings page</title>
   </head>
 
   <body>
     <header>
-      <a class="hidden_btn" href="settings.html"
-        ><i class="fa-solid fa-gear"></i
-      ></a>
       <h1><span class="E_span">E</span><span class="Q_span">Q</span></h1>
-      <a href="javascript:history.back()" class="back-btn"
-        ><i class="fa-solid fa-arrow-right"></i
-      ></a>
     </header>
-    <main class="setting_main_section">
-      <div class="edit_pofile">
+    <main>
+      <div>
         <h2>user information</h2>
         <h3 id="username"></h3>
         <h3 id="age"></h3>
         <h3 id="gender"></h3>
         <h3 id="email"></h3>
-        <button onclick="window.location.href='edit_data.html'">Edit</button>
+        <button onclick="window.location.href='edit_data.html'" class="edit_btn">Edit</button>
       </div>
-      <button class="setting_btn" onclick="window.location.href='page2.html'">
-        Language
-      </button>
-      <button class="setting_btn" onclick="window.location.href='page2.html'">
-        Privacy
-      </button>
-      <button class="setting_btn" onclick="window.location.href='page2.html'">
-        Privacy
-      </button>
-      <button class="setting_btn" onclick="window.location.href='page2.html'">
-        Notification
-      </button>
-      <button class="setting_btn" onclick="window.location.href='page2.html'">
-        About
-      </button>
-      <button class="setting_btn" onclick="showSignOutOption()">
-        Sign Out
-      </button>
-
-      <div id="signout_options" style="visibility: hidden">
-        <button id="yes_btn" onclick="clearLocalStorage()">Yes</button>
-        <button id="no_btn" onclick="hiddenSignOutOption()">No</button>
+      <div>
+        <button class="setting_btn" onclick="window.location.href='#'">
+          Dark mode
+        </button>
+        <button class="setting_btn" onclick="window.location.href='#'">
+          Language
+        </button>
+        <button class="setting_btn" onclick="window.location.href='#'">
+          Privacy
+        </button>
+        <button class="setting_btn" onclick="window.location.href='about.html'">
+          About
+        </button>
+        <button class="setting_btn" onclick="showSignOutOption()">
+          Sign Out
+        </button>
+  
+        <div id="signout_options" style="visibility: hidden">
+          <button id="yes_btn" onclick="clearLocalStorage()">Yes</button>
+          <button id="no_btn" onclick="hiddenSignOutOption()">No</button>
+        </div>
       </div>
     </main>
     <script>
@@ -69,7 +62,6 @@
 
       let el_visibility = document.getElementById("signout_options");
       function showSignOutOption() {
-
         if (el_visibility.style.visibility === "hidden") {
           el_visibility.style.visibility = "visible";
         } else {
@@ -79,7 +71,6 @@
       function clearLocalStorage() {
         // localStorage.clear();
         window.location.href = "index.html";
-
       }
       function hiddenSignOutOption() {
         if (el_visibility.style.visibility === "hidden") {

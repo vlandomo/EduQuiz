@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       currentQuestion.options.forEach((option, index) => {
         const label = document.createElement("label");
-        label.innerHTML = `<input type="radio" name="answer" value="${option}" ${
+        label.innerHTML = `<input type="radio" name="answer" value="${option}" class="radio_btn" ${
           userAnswers[currentQuestionIndex] === option ? "checked" : ""
         }> ${option}`;
         label.querySelector("input").addEventListener("click", function () {
