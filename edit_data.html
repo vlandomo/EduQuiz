@@ -10,7 +10,10 @@
 </head>
 
 <body>
-  <h1>تعديل البيانات</h1>
+  <header class="sign_header">
+   <h1>Edit Data</h1>
+  </header>
+ 
 
   <form id="userForm" class="userForm">
     <!-- الاسم الأول -->
@@ -30,56 +33,45 @@
   </form>
 
   <script>
-    // استرجاع بيانات المستخدم من Local Storage
-    let storedUser = JSON.parse(localStorage.getItem("user_info")) || {};
+// استرجاع بيانات المستخدم من Local Storage
+let storedUser = JSON.parse(localStorage.getItem("user_info")) || {};
 
-    // جلب الحقول من الصفحة
-    let edit_first_name = document.getElementById("first_name");
-    let edit_second_name = document.getElementById("second_name");
-    let edit_email = document.getElementById("email");
+// جلب الحقول من الصفحة
+let edit_first_name = document.getElementById("first_name");
+let edit_second_name = document.getElementById("second_name");
+let edit_email = document.getElementById("email");
 
-    // تعيين القيم المخزنة كقيم افتراضية
-    if (storedUser.first_name) edit_first_name.value = storedUser.first_name;
-    if (storedUser.second_name) edit_second_name.value = storedUser.second_name;
-    if (storedUser.email) edit_email.value = storedUser.email;
+// تعيين القيم المخزنة كقيم افتراضية
+if (storedUser.first_name) edit_first_name.value = storedUser.first_name;
+if (storedUser.second_name) edit_second_name.value = storedUser.second_name;
+if (storedUser.email) edit_email.value = storedUser.email;
 
-    function saveData() {
-      let updatedData = {}; // تخزين البيانات الجديدة فقط
-      let isChanged = false; // متغير للتحقق إذا تم تعديل أي بيانات
+function saveData() {
+  let updatedData = { ...storedUser }; // نسخ جميع البيانات القديمة
+  let isChanged = false; // متغير للتحقق من التعديل
 
-      // مقارنة القيم الجديدة مع القيم المخزنة
-      if (edit_first_name.value.trim() !== storedUser.first_name && edit_first_name.value.trim() !== '') {
-        updatedData.first_name = edit_first_name.value.trim();
-        isChanged = true;
-      }
-      else{
-        updatedData.first_name = storedUser.first_name;
-      }
-      if (edit_second_name.value.trim() !== storedUser.second_name && edit_second_name.value.trim() !== '') {
-        updatedData.second_name = edit_second_name.value.trim();
-        isChanged = true;
-      }
-      else{
-        updatedData.second_name = storedUser.second_name;
-      }
+  // مقارنة القيم الجديدة مع القيم المخزنة
+  if (edit_first_name.value.trim() !== '' && edit_first_name.value.trim() !== storedUser.first_name) {
+    updatedData.first_name = edit_first_name.value.trim();
+    isChanged = true;
+  }
 
-      // إذا لم يتم تغيير أي شيء، لا تقم بالتحديث
-      if (!isChanged || edit_second_name.value.trim() !== '' || edit_first_name.value.trim() !== '') {
-        window.location.href = "settings.html";
-        return;
-      }
+  if (edit_second_name.value.trim() !== '' && edit_second_name.value.trim() !== storedUser.second_name) {
+    updatedData.second_name = edit_second_name.value.trim();
+    isChanged = true;
+  }
 
-      // الاحتفاظ بالقيم القديمة غير القابلة للتعديل
-      updatedData.email = storedUser.email; 
-      updatedData.age = storedUser.age;
-      updatedData.gender = storedUser.gender;
-      updatedData.password = storedUser.password;
+  // إذا لم يتم تغيير أي شيء، لا تقم بالتحديث
+  if (!isChanged) {
+    window.location.href = "settings.html";
+    return;
+  }
 
-      // حفظ البيانات الجديدة في Local Storage
-      localStorage.setItem("user_info", JSON.stringify(updatedData));
-      alert("تم حفظ التغييرات بنجاح!");
-      window.location.href = "choicepage.html"; // توجيه المستخدم لصفحة أخرى
-    }
+  // حفظ البيانات الجديدة في Local Storage
+  localStorage.setItem("user_info", JSON.stringify(updatedData));
+  alert("تم حفظ التغييرات بنجاح!");
+  window.location.href = "choicepage.html"; // توجيه المستخدم لصفحة أخرى
+}
   </script>
 </body>
 

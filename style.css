@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 
 *:focus {
@@ -154,7 +155,21 @@ main h2{
 .edit_btn {
   margin: 20px 0;
 }
+#signout_options{
+  display:flex;
+  gap: 20px;
+}
 /**** login & sing up & edit *****/
+.sign_header {
+  display: flex;
+  justify-content: center ;
+  padding-top: 20px ;
+}
+.sign_header h1{
+  font-size: 2rem;
+  width: 800;
+  color: var(--twitter-hover-btn);
+}
 .userForm {
   padding: 20px;
 }
@@ -175,7 +190,6 @@ button {
   border-radius: 10px;
   padding: 0 10px;
 }
-
 input.error {
   border: 2px solid var(--focue-error-clr) !important;
 }

@@ -147,7 +147,7 @@ function textDirection_f() {
   }
 }
 //quiz function
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
   function startQuiz(questions) {
     let currentQuestionIndex = 0;
     let answered = false;
@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function () {
         label.innerHTML = `<input type="radio" name="answer" value="${option}" class="radio_btn" ${
           userAnswers[currentQuestionIndex] === option ? "checked" : ""
         }> ${option}`;
-        label.querySelector("input").addEventListener("click", function () {
+        label.querySelector("input").addEventListener("click", function() {
           checkAnswer(this);
         });
         optionsContainer.appendChild(label);
@@ -404,8 +404,7 @@ document.addEventListener("DOMContentLoaded", function () {
     stage == "Primary_School" &&
     level == "Third Year" &&
     course == "Arabic"
-  ) {
-  } else if (
+  ) {} else if (
     stage == "Primary_School" &&
     level == "Third Year" &&
     course == "English"
