@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>signup</title>
+  </head>
+
+  <body>
+    <h1>SignUp</h1>
+
+    <form id="userForm" class="userForm">
+      <!-- first name -->
+      <label for="first_name">First Name</label>
+      <input
+        type="text"
+        id="first_name"
+        required
+        placeholder="Enter your first name"
+      />
+      <span class="error-text" id="first_name_error"
+        >First Name is required</span
+      >
+
+      <!-- second name -->
+      <label for="second_name">Second Name</label>
+      <input
+        type="text"
+        id="second_name"
+        required
+        placeholder="Enter your second name"
+      />
+      <span class="error-text" id="second_name_error"
+        >Second Name is required</span
+      >
+
+      <!-- age -->
+      <label for="age">Age</label>
+      <input type="date" id="age" required placeholder="Enter your age" />
+      <span class="error-text" id="age_error">Valid Age is required</span>
+
+      <!-- gender -->
+      <label for="gender">Gender</label>
+      <select id="gender" required>
+        <option value="">Choose Your Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+      <span class="error-text" id="gender_error">Gender is required</span>
+
+      <!-- email  -->
+      <label for="email">Email</label>
+      <input type="email" id="email" required placeholder="Enter your email" />
+      <span class="error-text" id="email_error">Invalid email format</span>
+
+      <!-- password -->
+      <label for="password">Password</label>
+      <div class="password-container">
+        <input
+          type="password"
+          id="password"
+          required
+          placeholder="yvhu%#:&-+36:7!8"
+        />
+        <i
+          class="fas fa-eye toggle-password"
+          onclick="togglePassword('password')"
+        ></i>
+      </div>
+      <span class="error-text" id="password_error"
+        >Password must include uppercase, lowercase, and numbers with at least 8
+        characters</span
+      >
+
+      <!-- Confirm Password -->
+      <label for="confirmPassword">Confirm Password</label>
+      <div class="password-container">
+        <input
+          type="password"
+          id="confirmPassword"
+          required
+          placeholder="yvhu%#:&-+36:7!"
+        />
+        <i
+          class="fas fa-eye toggle-password"
+          onclick="togglePassword('confirmPassword')"
+        ></i>
+      </div>
+      <span class="error-text" id="confirmPassword_error"
+        >Passwords do not match</span
+      >
+
+      <!-- Terms & Conditions -->
+      <div class="terms-container">
+        <input type="checkbox" id="terms" />
+        <label for="terms"
+          >I agree to the
+          <a href="Terms_Conditions.html">Terms & Conditions</a></label
+        >
+      </div>
+      <span class="error-text" id="terms_error">You must accept the terms</span>
+
+      <!-- Signup button -->
+      <button type="button" onclick="saveData()">Sign Up</button>
+
+      <p class="OR">OR</p>
+      <!-- social-login -->
+      <div class="social-login">
+        <button type="button" class="google-btn" onclick="loginWithGoogle()">
+          <i class="fab fa-google"></i>
+        </button>
+        <button
+          type="button"
+          class="facebook-btn"
+          onclick="loginWithFacebook()"
+        >
+          <i class="fab fa-facebook"></i>
+        </button>
+        <button type="button" class="twitter-btn" onclick="loginWithTwitter()">
+          <i class="fab fa-twitter"></i>
+        </button>
+      </div>
+    </form>
+    <p class="action-link">
+      Already have an account?<a href="login.html">Login</a>
+    </p>
+
+    <script>
+      function validateEmail(email) {
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        return emailPattern.test(email);
+      }
+
+      function validatePassword(password) {
+        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password);
+      }
+
+      // cheack if valid is impty
+      function saveData() {
+        let fields = [
+          "first_name",
+          "second_name",
+          "age",
+          "gender",
+          "email",
+          "password",
+          "confirmPassword",
+        ];
+        // onload = function(){
+        //   let fisrt_el = getElementById('first_name')
+        //   first_el.focus();
+        //   first_el.style.border= 'red';
+        // }
+        let valid = true;
+
+        let userData = {}; // كائن لتخزين بيانات المستخدم
+
+        fields.forEach((field) => {
+          let input = document.getElementById(field);
+          let error = document.getElementById(`${field}_error`);
+
+          if (!input.value.trim()) {
+            input.classList.add("error");
+            error.style.display = "block";
+            valid = false;
+          } else {
+            input.classList.remove("error");
+            error.style.display = "none";
+            userData[field] = input.value.trim(); // تخزين القيم في الكائن
+          }
+        });
+
+        let email = document.getElementById("email").value.trim();
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (!validateEmail(email)) {
+          document.getElementById("email").classList.add("error");
+          document.getElementById("email_error").style.display = "block";
+          valid = false;
+        }
+
+        if (!validatePassword(password)) {
+          document.getElementById("password").classList.add("error");
+          document.getElementById("password_error").style.display = "block";
+          valid = false;
+        }
+
+        if (password !== confirmPassword) {
+          document.getElementById("confirmPassword").classList.add("error");
+          document.getElementById("confirmPassword_error").style.display =
+            "block";
+          valid = false;
+        }
+
+        let terms = document.getElementById("terms");
+        if (!terms.checked) {
+          document.getElementById("terms_error").style.display = "block";
+          valid = false;
+        } else {
+          document.getElementById("terms_error").style.display = "none";
+        }
+
+        if (valid) {
+          // تخزين بيانات المستخدم في localStorage
+          localStorage.setItem("user_info", JSON.stringify(userData));
+          window.location.href = "choicepage.html"; // توجيه المستخدم لصفحة تسجيل الدخول
+        }
+      }
+
+      function togglePassword(fieldId) {
+        let field = document.getElementById(fieldId);
+        let icon = field.nextElementSibling;
+        field.type = field.type === "password" ? "text" : "password";
+        icon.classList.toggle("fa-eye-slash");
+      }
+
+      function loginWithGoogle() {
+        window.location.href = "choicepage.html"; // توجيه المستخدم إلى الصفحة الرئيسية بعد النجاح
+      }
+
+      function loginWithFacebook() {
+        window.location.href = "choicepage.html"; // توجيه المستخدم إلى الصفحة الرئيسية بعد النجاح
+      }
+
+      function loginWithTwitter() {
+        window.location.href = "choicepage.html"; // توجيه المستخدم إلى الصفحة الرئيسية بعد النجاح
+      }
+    </script>
+  </body>
+</html>

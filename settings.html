@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+    <title>Sittings</title>
+  </head>
+
+  <body>
+    <header>
+      <a class="hidden_btn" href="settings.html"
+        ><i class="fa-solid fa-gear"></i
+      ></a>
+      <h1><span class="E_span">E</span><span class="Q_span">Q</span></h1>
+      <a href="javascript:history.back()" class="back-btn"
+        ><i class="fa-solid fa-arrow-right"></i
+      ></a>
+    </header>
+    <main class="setting_main_section">
+      <div class="edit_pofile">
+        <h2>user information</h2>
+        <h3 id="username"></h3>
+        <h3 id="age"></h3>
+        <h3 id="gender"></h3>
+        <h3 id="email"></h3>
+        <button onclick="window.location.href='edit_data.html'">Edit</button>
+      </div>
+      <button class="setting_btn" onclick="window.location.href='page2.html'">
+        Language
+      </button>
+      <button class="setting_btn" onclick="window.location.href='page2.html'">
+        Privacy
+      </button>
+      <button class="setting_btn" onclick="window.location.href='page2.html'">
+        Privacy
+      </button>
+      <button class="setting_btn" onclick="window.location.href='page2.html'">
+        Notification
+      </button>
+      <button class="setting_btn" onclick="window.location.href='page2.html'">
+        About
+      </button>
+      <button class="setting_btn" onclick="showSignOutOption()">
+        Sign Out
+      </button>
+
+      <div id="signout_options" style="visibility: hidden">
+        <button id="yes_btn" onclick="clearLocalStorage()">Yes</button>
+        <button id="no_btn" onclick="hiddenSignOutOption()">No</button>
+      </div>
+    </main>
+    <script>
+      let getuserinfo = JSON.parse(localStorage.getItem("user_info"));
+      let showdata_name = document.getElementById("username");
+      showdata_name.innerHTML = `Name:  ${getuserinfo.first_name} ${getuserinfo.second_name}`;
+
+      let showdata_age = document.getElementById("age");
+      showdata_age.innerHTML = `Age: ${getuserinfo.age}`;
+      let showdata_gender = document.getElementById("gender");
+
+      showdata_gender.innerHTML = `Gender: ${getuserinfo.gender}`;
+      let showdata_email = document.getElementById("email");
+      showdata_email.innerHTML = `Email: ${getuserinfo.email}`;
+
+      let el_visibility = document.getElementById("signout_options");
+      function showSignOutOption() {
+
+        if (el_visibility.style.visibility === "hidden") {
+          el_visibility.style.visibility = "visible";
+        } else {
+          el_visibility.style.visibility = "hidden";
+        }
+      }
+      function clearLocalStorage() {
+        // localStorage.clear();
+        window.location.href = "index.html";
+
+      }
+      function hiddenSignOutOption() {
+        if (el_visibility.style.visibility === "hidden") {
+          el_visibility.style.visibility = "visible";
+        } else {
+          el_visibility.style.visibility = "hidden";
+        }
+      }
+    </script>
+  </body>
+</html>

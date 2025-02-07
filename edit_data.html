@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <title>تعديل البيانات</title>
+</head>
+
+<body>
+  <h1>تعديل البيانات</h1>
+
+  <form id="userForm" class="userForm">
+    <!-- الاسم الأول -->
+    <label for="first_name">First Name</label>
+    <input type="text" id="first_name" placeholder="Enter your first name" />
+
+    <!-- الاسم الثاني -->
+    <label for="second_name">Second Name</label>
+    <input type="text" id="second_name" placeholder="Enter your second name" />
+
+    <!-- البريد الإلكتروني (غير قابل للتعديل) -->
+    <label for="email">Email</label>
+    <input type="email" id="email" readonly />
+
+    <!-- زر الحفظ -->
+    <button type="button" onclick="saveData()">Save Changes</button>
+  </form>
+
+  <script>
+    // استرجاع بيانات المستخدم من Local Storage
+    let storedUser = JSON.parse(localStorage.getItem("user_info")) || {};
+
+    // جلب الحقول من الصفحة
+    let edit_first_name = document.getElementById("first_name");
+    let edit_second_name = document.getElementById("second_name");
+    let edit_email = document.getElementById("email");
+
+    // تعيين القيم المخزنة كقيم افتراضية
+    if (storedUser.first_name) edit_first_name.value = storedUser.first_name;
+    if (storedUser.second_name) edit_second_name.value = storedUser.second_name;
+    if (storedUser.email) edit_email.value = storedUser.email;
+
+    function saveData() {
+      let updatedData = {}; // تخزين البيانات الجديدة فقط
+      let isChanged = false; // متغير للتحقق إذا تم تعديل أي بيانات
+
+      // مقارنة القيم الجديدة مع القيم المخزنة
+      if (edit_first_name.value.trim() !== storedUser.first_name && edit_first_name.value.trim() !== '') {
+        updatedData.first_name = edit_first_name.value.trim();
+        isChanged = true;
+      }
+      else{
+        updatedData.first_name = storedUser.first_name;
+      }
+      if (edit_second_name.value.trim() !== storedUser.second_name && edit_second_name.value.trim() !== '') {
+        updatedData.second_name = edit_second_name.value.trim();
+        isChanged = true;
+      }
+      else{
+        updatedData.second_name = storedUser.second_name;
+      }
+
+      // إذا لم يتم تغيير أي شيء، لا تقم بالتحديث
+      if (!isChanged || edit_second_name.value.trim() !== '' || edit_first_name.value.trim() !== '') {
+        window.location.href = "settings.html";
+        return;
+      }
+
+      // الاحتفاظ بالقيم القديمة غير القابلة للتعديل
+      updatedData.email = storedUser.email; 
+      updatedData.age = storedUser.age;
+      updatedData.gender = storedUser.gender;
+      updatedData.password = storedUser.password;
+
+      // حفظ البيانات الجديدة في Local Storage
+      localStorage.setItem("user_info", JSON.stringify(updatedData));
+      alert("تم حفظ التغييرات بنجاح!");
+      window.location.href = "choicepage.html"; // توجيه المستخدم لصفحة أخرى
+    }
+  </script>
+</body>
+
+</html>

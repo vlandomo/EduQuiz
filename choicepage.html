@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="style.css">
+  <title>Education</title>
+</head>
+
+<body>
+  <header>
+    <a href="settings.html"><i class="fa-solid fa-gear"></i></a>
+    <h1><span class="E_span">E</span>du<span class="Q_span">Q</span>uiz
+    </h1>
+    <a class="hidden_btn" href="javascript:history.back()" class="back-btn"><i class="fa-solid fa-arrow-right"></i></a>
+  </header>
+  <main>
+    <h2>Choose Your Education Path</h2>
+    <form id="educationForm" class="educationForm">
+      <label for="education_stages">Education Stage</label>
+      <select id="education_stages" required>
+        <option value="">Choose Your Education Stage</option>
+        <option value="Primary_School">Primary School</option>
+        <option value="Middle_School">Middle School</option>
+        <option value="High_School">High School</option>
+      </select>
+
+      <label for="level">Level</label>
+      <select id="level" required>
+        <option value="">Choose Your Level</option>
+      </select>
+
+      <label for="select_course">Course</label>
+      <select id="select_course" required>
+        <option value="">Choose Your Course</option>
+      </select>
+
+      <button type="button" id="startTestBtn" style="display: none;">Start Test</button>
+    </form>
+  </main>
+
+  <script defe>
+    // اي اسم اول حرف كبير حتي لو كلمتين
+    const optionsData = {
+      Primary_School: {
+        "First Year": ["Arabic", "English", "Math", "Religion"],
+        "Second Year": ["Arabic", "English", "Math", "Religion"],
+        "Third Year": ["Arabic", "English", "Math", "Religion"],
+        "Fourth Year": ["Arabic", "English", "Math", "Religion", "Social Studies", "Science"],
+        "Fifth Year": ["Arabic", "English", "Math", "Religion", "Social Studies", "Science"],
+        "Sixth Year": ["Arabic", "English", "Math", "Religion", "Social Studies", "Science"]
+      },
+      Middle_School: {
+        "First Year": ["Arabic", "English", "Math", "Religion", "Social Studies", "Science"],
+        "Second Year": ["Arabic", "English", "Math", "Religion", "Social Studies", "Science"],
+        "Third Year": ["Arabic", "English", "Math", "Religion", "Social Studies", "Science"]
+      },
+      High_School: {
+        "First Year": ["Arabic", "English", "Math", "Religion", "Physics", "Chemistry"],
+        "Second Year": ["Arabic", "English", "Math", "Religion", "Physics", "Chemistry"],
+        "Third Year": ["Arabic", "English", "Math", "Religion", "Physics", "Chemistry"]
+      }
+    };
+
+    const educationStages = document.getElementById("education_stages");
+    const level = document.getElementById("level");
+    const selectCourse = document.getElementById("select_course");
+    const startTestBtn = document.getElementById("startTestBtn");
+
+    // تحديث قائمة المستويات بناءً على المرحلة الدراسية
+    educationStages.addEventListener("change", function() {
+      const selectedStage = this.value;
+      level.innerHTML = "<option value=''>Choose Your Level</option>";
+      selectCourse.innerHTML = "<option value=''>Choose Your Course</option>";
+      startTestBtn.style.display = "none";
+
+      if (selectedStage && optionsData[selectedStage]) {
+        Object.keys(optionsData[selectedStage]).forEach((item) => {
+          const option = document.createElement("option");
+          option.value = item;
+          option.textContent = item;
+          level.appendChild(option);
+        });
+      }
+    });
+
+    // تحديث قائمة المواد بناءً على المستوى
+    level.addEventListener("change", function() {
+      const selectedStage = educationStages.value;
+      const selectedLevel = this.value;
+      selectCourse.innerHTML = "<option value=''>Choose Your Course</option>";
+      startTestBtn.style.display = "none";
+
+      if (selectedStage && selectedLevel && optionsData[selectedStage][selectedLevel]) {
+        optionsData[selectedStage][selectedLevel].forEach((item) => {
+          const option = document.createElement("option");
+          option.value = item;
+          option.textContent = item;
+          selectCourse.appendChild(option);
+        });
+      }
+    });
+
+    // إظهار زر بدء الاختبار عند اكتمال جميع الاختيارات
+    selectCourse.addEventListener("change", function() {
+      if (educationStages.value && level.value && selectCourse.value) {
+        startTestBtn.style.display = "block";
+      } else {
+        startTestBtn.style.display = "none";
+      }
+    });
+
+    // الانتقال إلى صفحة الأسئلة عند الضغط على زر "بدء الاختبار"
+    startTestBtn.addEventListener("click", function() {
+      const stage = educationStages.value;
+      const lvl = level.value;
+      const course = selectCourse.value;
+
+      if (stage && lvl && course) {
+        window.location.href = `questions.html?stage=${stage}&level=${lvl}&course=${course}`;
+      }
+    });
+  </script>
+</body>
+
+</html>
