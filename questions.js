@@ -283,19 +283,24 @@ document.addEventListener("DOMContentLoaded", function() {
       resultContainer.style.display = "block";
       resultContainer.innerHTML = `
       <table>
+      
        <tr colspan="2">Result</tr>
+       
        <tr>
        <td>Correct Answers</td>
        <td>${correctAnswers}</td>
        </tr>
+       
        <tr>
        <td>Wrong Answers</td>
        <td>${wrongAnswers}</td>
        </tr>
+       
        <tr class="percentage">
        <td>Percentage</td>
        <td>${((correctAnswers / questions.length) * 100).toFixed(2)}%</td>
        </tr>
+       
       </table>
             `;
 
