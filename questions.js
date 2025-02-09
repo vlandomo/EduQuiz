@@ -303,21 +303,32 @@ document.addEventListener("DOMContentLoaded", function() {
         resultContainer.innerHTML += `<div class="wrong-questions"><h3>Questions you answered incorrectly:-</h3>`;
         wrongQuestions.forEach((wrong) => {
           resultContainer.innerHTML += `
-                        <div>
-                            <p><strong>Question:</strong> ${wrong.question}</p>
-                            <p><strong>Your Answer:</strong> ${
-                              wrong.userAnswer
-                            }</p>
-                            <p><strong>Correct Answer:</strong> ${
-                              wrong.correctAnswer
-                            }</p>
-                            <p><strong>Choices:</strong> ${wrong.options.join(
-                              ", "
-                            )}</p>
-                            <p class="explanation"><strong>Explain:</strong> ${
-                              wrong.explanation
-                            }</p>
-                        </div>
+                        <table class= "result_table">
+                        <tr>
+                        <td colspan="2">${wrong.question}</td>
+                        </tr>
+
+                        <tr>
+                        <td>Choices</td>
+                        <td>${wrong.options.join(" - ")}</td>
+                        </tr>
+
+                        <tr>
+                        <td>Your Answer</td>
+                        <td>${wrong.correctAnswer}</td>
+                        </tr>
+
+                        <tr>
+                        <td>Correct Answer</td>
+                        <td>${wrong.correctAnswer}</td>
+                        </tr>
+
+                        <tr>
+                        <td>explanation</td>
+                        <td>${wrong.explanation}</td>
+                        </tr>
+                        
+                        </table>
                         <div class="separator"></div>
                     `;
         });
