@@ -282,15 +282,21 @@ document.addEventListener("DOMContentLoaded", function() {
       quizContainer.style.display = "none";
       resultContainer.style.display = "block";
       resultContainer.innerHTML = `
-                <p><strong>Result</strong></p>
-                <p>Correct Answers: ${correctAnswers}</p>
-                <p>WrongAnswers: ${wrongAnswers}</p>
-                <div class="percentage">
-                    <p>Percentage: ${(
-                      (correctAnswers / questions.length) *
-                      100
-                    ).toFixed(2)}%</p>
-                </div>
+      <table>
+       <tr>Result</tr>
+       <tr>
+       <td>Correct Answers</td>
+       <td>${correctAnswers}</td>
+       </tr>
+       <tr>
+       <td>Wrong Answers</td>
+       <td>${wrongAnswers}</td>
+       </tr>
+       <tr class="percentage">
+       <td>Percentage</td>
+       <td>${((correctAnswers / questions.length) * 100).toFixed(2)}%</td>
+       </tr>
+      </table>
             `;
 
       if (wrongAnswers > 0) {
