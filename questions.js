@@ -325,7 +325,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                         <tr>
                         <td>explanation</td>
-                        <td>${wrong.explanation}</td>
+                        <td>${correctAnswers.explanation}</td>
                         </tr>
                         
                         </table>
