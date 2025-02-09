@@ -4,7 +4,7 @@ function Primary_School_First_Year_Arabic() {
   return [
     {
       question: "كون كلمة باستخدام كل هذة الحروف ( م - ة - ل - م - ع )",
-      options: ["معلم", "علوم", "معلمة", "علم"],
+      options: [" معلم ", " علوم ", " معلمة ", " علم "],
       answer: "معلمة",
       explanation: "الإجابة الصحيحة هي : معلمة.",
     },
