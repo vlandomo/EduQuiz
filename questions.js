@@ -283,7 +283,7 @@ document.addEventListener("DOMContentLoaded", function() {
       resultContainer.style.display = "block";
       resultContainer.innerHTML = `
       <table>
-       <tr>Result</tr>
+       <tr colspan="2">Result</tr>
        <tr>
        <td>Correct Answers</td>
        <td>${correctAnswers}</td>
@@ -303,7 +303,7 @@ document.addEventListener("DOMContentLoaded", function() {
         resultContainer.innerHTML += `<div class="wrong-questions"><h3>Questions you answered incorrectly:-</h3>`;
         wrongQuestions.forEach((wrong) => {
           resultContainer.innerHTML += `
-                        <table class= "result_table">
+                        <table>
                         <tr>
                         <td colspan="2">${wrong.question}</td>
                         </tr>
